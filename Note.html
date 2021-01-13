@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>inclusion direct et indirect</title>
+    <style>
+        table,
+        tr,
+        td {
+            font-family: "Times New Roman";
+            font-size: 16px;
+            border: 1px solid navy;
+            border-collapse: collapse;
+            width: 850px;
+        }
+
+        thead td {
+            font-weight: bold;
+        }
+
+        #th1 {
+            background-color: #008CBA;
+        }
+
+        #th2 {
+            background-color: gainsboro;
+        }
+
+        #div {
+            margin: 50px 0px 0px 150px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <form action="test.html">
+
+        <input type="hidden" id="eleves" value="Zakaria Abderahmane;Abdellah Mohammed;Younes Yacine;Rahime Rahmani" />
+        <input type="hidden" id="matiere" value="math;physique;science naturelle" />
+        <input type="hidden" id="math-note1" value="12.75;13.75;15.00;12.25" />
+        <input type="hidden" id="math-note2" value="12.75;13.75;11.50;12.25" />
+        <input type="hidden" id="math-note3" value="12.75;13.75;13.25;12.25" />
+        <input type="hidden" id="physique-note1" value="12.75;13.75;12.75;12.25" />
+        <input type="hidden" id="physique-note2" value="12.75;13.75;14.00;12.25" />
+        <input type="hidden" id="physique-note3" value="12.75;13.75;16.75;12.25" />
+        <input type="hidden" id="sciencenaturelle-note1" value="12.75;13.75;17.25;12.25" />
+        <input type="hidden" id="sciencenaturelle-note2" value="12.75;13.75;10.75;12.25" />
+        <input type="hidden" id="sciencenaturelle-note3" value="12.75;13.75;09.25;12.25" />
+
+        <div id="div">
+            <table>
+                <caption>
+                    <h2>Notes des élèves par nom et par matière</h2>
+                </caption>
+                <thead>
+                    <tr id="th1">
+                        <td></td>
+                        <td colspan="3" align="center">Math</td>
+                        <td colspan="3" align="center">Physique</td>
+                        <td colspan="3" align="center">Science Naturelle</td>
+                        <td></td>
+                    </tr>
+                    <tr id="th2">
+                        <td>Nom et prénom</td>
+                        <td>Note1</td>
+                        <td>Note2</td>
+                        <td>Note3</td>
+                        <td>Note1</td>
+                        <td>Note2</td>
+                        <td>Note3</td>
+                        <td>Note1</td>
+                        <td>Note2</td>
+                        <td>Note3</td>
+                        <td>Moyenne</td>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+                <tfoot id="tfoot">
+
+                </tfoot>
+            </table>
+
+        </div>
+    </form>
+
+
+    <script>
+        //var tagTr = document.createElement('tr');
+        //var tagTd = document.createElement('td');
+        var tbody = document.getElementById("tbody");
+        var objEleves = document.getElementById("eleves");
+        var objMatiere = document.getElementById("matiere");
+        var objMathNote1 = document.getElementById("math-note1");
+        var objMathNote2 = document.getElementById("math-note2");
+        var objMathNote3 = document.getElementById("math-note3");
+        var objPhyNote1 = document.getElementById("physique-note1");
+        var objPhyNote2 = document.getElementById("physique-note2");
+        var objPhyNote3 = document.getElementById("physique-note3");
+        var objSnNote1 = document.getElementById("sciencenaturelle-note1");
+        var objSnNote2 = document.getElementById("sciencenaturelle-note2");
+        var objSnNote3 = document.getElementById("sciencenaturelle-note3");
+
+        var eleves = document.getElementById("eleves").value.split(';');
+        var matiere = document.getElementById("matiere").value.split(';');
+        var mathNote1 = document.getElementById("math-note1").value.split(';');
+        var mathNote2 = document.getElementById("math-note2").value.split(';');
+        var mathNote3 = document.getElementById("math-note3").value.split(';');
+        var phyNote1 = document.getElementById("physique-note1").value.split(';');
+        var phyNote2 = document.getElementById("physique-note2").value.split(';');
+        var phyNote3 = document.getElementById("physique-note3").value.split(';');
+        var snNote1 = document.getElementById("sciencenaturelle-note1").value.split(';');
+        var snNote2 = document.getElementById("sciencenaturelle-note2").value.split(';');
+        var snNote3 = document.getElementById("sciencenaturelle-note3").value.split(';');
+
+
+        var tabEleves = objEleves.value.split(';');
+
+        for (let i = 0; i < eleves.length; i++) {
+
+            let tagTr = document.createElement('tr');
+            let moyM = 0;
+            let moyP = 0;
+            let moySN = 0;
+
+            let tagTd1 = document.createElement('td');
+            tagTd1.innerHTML = eleves[i];
+            tagTr.appendChild(tagTd1);
+
+            let tagTd2 = document.createElement('td');
+            tagTd2.innerHTML = mathNote1[i];
+            tagTr.appendChild(tagTd2);
+            moyM += parseFloat(mathNote1[i]);
+
+            let tagTd3 = document.createElement('td');
+            tagTd3.innerHTML = mathNote2[i];
+            tagTr.appendChild(tagTd3);
+            moyM += parseFloat(mathNote2[i]);
+
+            let tagTd4 = document.createElement('td');
+            tagTd4.innerHTML = mathNote3[i];
+            tagTr.appendChild(tagTd4);
+            moyM += parseFloat(mathNote3[i]);
+
+            moyM = moyM / 3;
+
+
+            let tagTd5 = document.createElement('td');
+            tagTd5.innerHTML = phyNote1[i];
+            tagTr.appendChild(tagTd5);
+            moyP += parseFloat(phyNote1[i]);
+
+            let tagTd6 = document.createElement('td');
+            tagTd6.innerHTML = phyNote2[i];
+            tagTr.appendChild(tagTd6);
+            moyP += parseFloat(phyNote2[i]);
+
+            let tagTd7 = document.createElement('td');
+            tagTd7.innerHTML = phyNote3[i];
+            tagTr.appendChild(tagTd7);
+            moyP += parseFloat(phyNote3[i]);
+            moyP = moyP / 3;
+
+            let tagTd8 = document.createElement('td');
+            tagTd8.innerHTML = snNote1[i];
+            tagTr.appendChild(tagTd8);
+            moySN += parseFloat(snNote1[i]);
+
+            let tagTd9 = document.createElement('td');
+            tagTd9.innerHTML = snNote2[i];
+            tagTr.appendChild(tagTd9);
+            moySN += parseFloat(snNote2[i]);
+
+            let tagTd10 = document.createElement('td');
+            tagTd10.innerHTML = snNote3[i];
+            tagTr.appendChild(tagTd10);
+            moySN += parseFloat(snNote3[i]);
+            moySN = moySN / 3;
+
+            let tagTd11 = document.createElement('td');
+            let moy = (moyM + moySN + moyP) / 3;
+            tagTd11.innerHTML = moy.toFixed(2);
+            tagTr.appendChild(tagTd11);
+
+            tbody.appendChild(tagTr);
+
+
+        }
+
+
+    </script>
+</body>
+
+</html>
